@@ -1,7 +1,3 @@
-# Trex
-# Trex...
-### AMENI
-
 # SETUP GUIDE :
 
 ## 1. Setup NIC ports DPDK drivers

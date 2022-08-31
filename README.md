@@ -13,7 +13,6 @@ cd /opt/trex/v2.XX/
 ./dpdk_setup_ports.py -s
 ```
 3/ Insert the kernel driver and bind NIC ports
-
 ```bash
 modprobe uio
 insmod ko/src/igb_uio.ko

@@ -13,6 +13,12 @@ def create_udp_pkt(src_ip):
 		pkt = Ether() / IP(src=src, dst="10.0.0.10") / UDP(dport=1400) / Raw('x'*20)
 	)
 
+def create_gtpu_pkt(src_ip, teid):
+	return STLPktBuilder(
+		pkt
+	)
+
+
 def start():
 	
 	# create client
@@ -23,10 +29,10 @@ def start():
 	try:	
 		# create two streams
 
-		s1 = STLStream(packet=create_pkt("10.0.0.1"),
+		s1 = STLStream(packet=create_udp_pkt("10.0.0.1"),
 				mode=STLXCont())
 
-		s1 = STLStream(packet=create_pkt("10.0.0.2"),
+		s1 = STLStream(packet=create_udp_pkt("10.0.0.2"),
 				mode=STLXCont())
 
 		# connect to server

@@ -13,7 +13,7 @@ def create_udp_pkt(src_ip):
 		pkt = Ether() / IP(src=src, dst="10.0.0.10") / UDP(dport=1400) / Raw('x'*20)
 	)
 
-def create_udp_pkt(src_ip, teid):
+def create_gtpu_pkt(src_ip, teid):
 
 	return STLPktBuilder(
 		
@@ -32,7 +32,6 @@ def start():
 	
 	try:	
 		# create two streams
-
 		s1 = STLStream(packet=create_udp_pkt("10.0.0.1"),
 				mode=STLXCont())
 
@@ -88,7 +87,7 @@ def start():
 	if passed:
 		print("\nTest has passed \n")
 	else:
-		print("\nTest has failed ")
+		print("\nTest has failed \n")
 
 
 start()	

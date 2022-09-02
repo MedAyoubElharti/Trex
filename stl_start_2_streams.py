@@ -18,8 +18,8 @@ def create_udp_pkt(src_ip, teid):
 	return STLPktBuilder(
 		
 		pkt = Ether() / IP(dst="10.0.0.10", src=ip_src) / UDP(sport=2152, dport=2152)
-    	pkt = pkt / GTP_U_Header(gtp_type=255, E=1, next_ex=0x85, teid= teid)
-    	pkt = pkt / GTPPDUSessionContainer(type=0, QFI=qfi, NextExtHdr=0)/IP()
+		pkt = pkt / GTP_U_Header(gtp_type=255, E=1, next_ex=0x85, teid= teid)
+		pkt = pkt / GTPPDUSessionContainer(type=0, QFI=qfi, NextExtHdr=0)/IP()
 	)
 
 

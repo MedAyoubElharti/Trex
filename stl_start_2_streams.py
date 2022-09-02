@@ -54,6 +54,31 @@ def start():
 		# get stats 
 		stats = c.get_stats()
 
+		print(json.dumps(stats[1], indent=4,
+						separators=(',', ': '), sort_keys=True))
+		print(json.dumps(stats[0], indent=4,
+						separators=(',', ': '), sort_keys=True))
+
+		lost_a = stats[1]["opackets"] - stats[0]["ipackets"]
+
+		print("packes lost from 1 --> 0: {0} pkts".format(lost_a))
+
+		if (lost_a == 0):
+			passed = True
+		else:
+			passed = False
+	
+	except STLError as e:
+		passed = False
+		print(e)
+
+	finally:
+		c.disconnect()
 		
+	if passed:
+		print("\nTest has passed \n")
+	else:
+		print("\nTest has failed ")
 
 
+start()	

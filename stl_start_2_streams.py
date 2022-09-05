@@ -32,11 +32,22 @@ def start():
 	
 	try:	
 		# create two streams
+		'''
 		s1 = STLStream(packet=create_gtpu_pkt("10.0.0.10", 10),
 				mode=STLTXCont())
 
 		s2 = STLStream(packet=create_gtpu_pkt("1.0.0.10", 15),
 				mode=STLTXCont())
+		
+		streams = [s1, s2]
+		'''
+		
+		# create 20.000 streams
+		streams = []
+		for i in range(20):
+			for teid in range(1000):
+				session = [str(i) + ".0.0.10", teid]
+				sessions.append(session)
 
 		# connect to server
 		c.connect()
@@ -45,7 +56,7 @@ def start():
 		c.reset(ports=[0, 1])
 		
 		# add streams to tx_port (1)
-		c.add_streams([s1, s2], ports = [1]) 
+		c.add_streams(streams, ports = [1]) 
 		
 		# clear stats
 		c.clear_stats()

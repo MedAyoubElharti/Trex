@@ -67,7 +67,7 @@ def start():
 		
 		# start injecting packets:
 		print("Injecting 10 Mpps on ports 1 for 30s .........")
-		c.start(ports=[1], mult="10mpps", duration = 30)
+		c.start(ports=[1], mult="30mpps", duration = 30)
 
 		#
 		c.wait_on_traffic(ports=[1])

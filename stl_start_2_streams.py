@@ -3,6 +3,7 @@ from trex_stl_lib.api import *
 
 import time
 import json
+from scapy.contrib.gtp import GTP_U_Header, GTPPDUSessionContainer
 
 
 # create udp packet
@@ -10,16 +11,15 @@ import json
 def create_udp_pkt(src_ip):
 	
 	return STLPktBuilder(
-		pkt = Ether() / IP(src=src, dst="10.0.0.10") / UDP(dport=1400) / Raw('x'*20)
+		pkt = Ether() / IP(src=src_ip, dst="10.0.0.10") / UDP(dport=1400) / Raw('x'*20)
 	)
 
-def create_gtpu_pkt(src_ip, teid):
+def create_gtpu_pkt(src_IP, teid):
 
 	return STLPktBuilder(
 		
-		pkt = Ether() / IP(dst="10.0.0.10", src=ip_src) / UDP(sport=2152, dport=2152)
-		pkt = pkt / GTP_U_Header(gtp_type=255, E=1, next_ex=0x85, teid= teid)
-		pkt = pkt / GTPPDUSessionContainer(type=0, QFI=qfi, NextExtHdr=0)/IP()
+		pkt = Ether() / IP(src = src_IP, dst = "10.0.0.1") / UDP(sport=2152, dport=2152) / GTP_U_Header(gtp_type=255, E=1, next_ex=0x85, teid=teid) /
+						GTPPDUSessionContainer(type=0, QFI=0, NextExtHdr=0) / IP() / (10*'x')
 	)
 
 
@@ -32,11 +32,11 @@ def start():
 	
 	try:	
 		# create two streams
-		s1 = STLStream(packet=create_udp_pkt("10.0.0.1"),
-				mode=STLXCont())
+		s1 = STLStream(packet=create_gtpu_pkt("10.0.0.10", 10),
+				mode=STLTXCont())
 
-		s1 = STLStream(packet=create_udp_pkt("10.0.0.2"),
-				mode=STLXCont())
+		s2 = STLStream(packet=create_gtpu_pkt("1.0.0.10", 15),
+				mode=STLTXCont())
 
 		# connect to server
 		c.connect()
@@ -55,7 +55,7 @@ def start():
 		
 		# start injecting packets:
 		print("Injecting 10 Mpps on ports 1 for 30s .........")
-		c.strat(ports=[1], mult="10mpps", duration = 30)
+		c.start(ports=[1], mult="10mpps", duration = 30)
 
 		#
 		c.wait_on_traffic(ports=[1])

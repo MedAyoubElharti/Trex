@@ -46,7 +46,8 @@ def start():
 		streams = []
 		for i in range(20):
 			for teid in range(1000):
-				session = [str(i) + ".0.0.10", teid]
+				session = STLStream(packet=create_gtpu_pkt(str(i) + ".0.0.10", teid),
+				mode=STLTXCont())
 				streams.append(session)
 
 		# connect to server

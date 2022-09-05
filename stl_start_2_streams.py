@@ -41,13 +41,13 @@ def start():
 		
 		streams = [s1, s2]
 		'''
-		
+
 		# create 20.000 streams
 		streams = []
 		for i in range(20):
 			for teid in range(1000):
 				session = [str(i) + ".0.0.10", teid]
-				sessions.append(session)
+				streams.append(session)
 
 		# connect to server
 		c.connect()

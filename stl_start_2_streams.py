@@ -93,6 +93,9 @@ def start():
 		date = datetime.datetime.now().strftime("%Y_%m_%d-%H_%M")
 
 		s = save_to_file("latency", stats["latency"], date)
+
+		if not(s) :
+			return False
 	
 	except STLError as e:
 		passed = False

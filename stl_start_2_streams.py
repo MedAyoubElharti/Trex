@@ -118,7 +118,7 @@ def save_to_file(name, data, date):
 			json.dump(data, out)
 
 	except Exception as e:
-		print("Saving failed") + str(e))
+		print("Saving failed " + str(e))
 		return False
 
 	print("Save success !")

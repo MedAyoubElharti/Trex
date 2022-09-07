@@ -4,6 +4,7 @@ from trex_stl_lib.api import *
 import time
 import json
 from scapy.contrib.gtp import GTP_U_Header, GTPPDUSessionContainer
+import datetime
 
 
 # create udp packet
@@ -88,6 +89,10 @@ def start():
 			passed = True
 		else:
 			passed = False
+		
+		date = datetime.datetime.now().strftime("%Y_%m_%d-%H_%M")
+
+		s = save_to_file("latency", stats["latency"], date)
 	
 	except STLError as e:
 		passed = False
@@ -101,5 +106,20 @@ def start():
 	else:
 		print("\nTest has failed \n")
 
+def save_to_file(name, data, date):
+
+	try :
+
+		filename = f"results/{}_{}.json"
+		with open(filename, "w") as out:
+			json.dump(data, out)
+
+	except Exception as e:
+		print("Saving failed") + str(e))
+		return False
+
+	print("Save success !")
+
+	return True 
 
 start()	

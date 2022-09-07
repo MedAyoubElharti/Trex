@@ -113,7 +113,7 @@ def save_to_file(name, data, date):
 
 	try :
 
-		filename = f"results/{}_{}.json"
+		filename = f"results/{name}_{date}.json"
 		with open(filename, "w") as out:
 			json.dump(data, out)
 

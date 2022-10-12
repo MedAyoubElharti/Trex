@@ -1,6 +1,30 @@
 # SETUP GUIDE :
 
-## 1. Setup NIC ports DPDK drivers
+
+## 1. Install Cisco TRex
+
+1/ create Trex directory 
+
+```bash
+mkdir -p /opt/trex
+```
+
+2/ Move to Trex directory 
+
+```bash
+cd /opt/trex/v2.XX/
+```
+3/ Download the lqst version of Trex
+
+```bash
+wget --no-cache --no-check-certificate https://trex-tgn.cisco.com/trex/release/latest
+```
+4/ untar the tar file
+
+```bash
+tar -xzvf latest
+```
+## 2. Setup NIC ports DPDK drivers
 
 1/ Move to Trex directory 
 

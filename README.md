@@ -3,7 +3,7 @@
 
 ## 1. Install Cisco TRex
 
-1/ create Trex directory 
+1/ Create Trex directory 
 
 ```bash
 mkdir -p /opt/trex
@@ -19,7 +19,7 @@ cd /opt/trex/v2.XX/
 ```bash
 wget --no-cache --no-check-certificate https://trex-tgn.cisco.com/trex/release/latest
 ```
-4/ untar the tar file
+4/ Untar the tar file
 
 ```bash
 tar -xzvf latest
